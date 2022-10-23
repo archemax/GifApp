@@ -1,6 +1,5 @@
 package com.example.gifapp
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_show_info.*
@@ -15,10 +14,17 @@ class ShowInfoActivity : AppCompatActivity() {
 
 
         val name = intent.getStringExtra("keyName") // only key from RVAdapter
+        val decsription = intent.getStringExtra("keyDesc")
+        val picture = intent.getIntExtra("keyPicture",R.drawable.user_1_pic)
+
+
 
 
         // show data in the ytext view
-        textViewFinal.text = name
+        textViewFinalName.text = name
+        textViewFinalDesc.text = decsription
+        imageViewFinal.setImageResource(picture)
+
 
 
     }
