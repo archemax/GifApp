@@ -1,54 +1,59 @@
 package com.example.gifapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gifapp.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+// implement interface fro UsersAdapter class
+class MainActivity : AppCompatActivity(),
+    UsersAdapter.OnItemClickListenerImpl {
 
     lateinit var binding: ActivityMainBinding
-    lateinit var adapterMainActivity: UsersAdapter // create adapter in MainActivity
+    lateinit var usersAdapter: UsersAdapter // create adapter in MainActivity
     lateinit var recyclerView: RecyclerView
+    // create a ViewModel
+    lateinit var viewModel: MainViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         binding = ActivityMainBinding.inflate(layoutInflater)
-
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        //////////////////////////////////////////////////////////////////////////////////////
+        // 1) create adapter
+        usersAdapter = UsersAdapter(this, this)
 
-        // creating method to initialize recView
-        initialize()
+        //допоміжний етап: передаємо розмітку
+        binding.RVMainActivityLayout.adapter = usersAdapter
+        //////////////////////////////////////////////////////////////////////////////////////
+        //2) create view model
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        //робимо observe даних
+        viewModel.usersLiveData.observe(this) { users ->
+            //щось придумав
+            usersAdapter.setList(users)
+        }
+
 
     }
 
-    private fun initialize() {
-        recyclerView = binding.RVMainActivity
-        adapterMainActivity = UsersAdapter(this)
-        recyclerView.adapter = adapterMainActivity
-        adapterMainActivity.setList(addListToRV())
+    // this is the implementation of fun form adapter's Interface
+    override fun onItemClicked(position: Int) {
+        Toast.makeText(this, "item $position CLICKED", Toast.LENGTH_SHORT).show()
+
+        val newList = viewModel.getUsersList()
+        val intent = Intent(this, ShowInfoActivity::class.java)
+            .putExtra("keyName", newList[position].name)
+            .putExtra("keyDesc", newList[position].description)
+            .putExtra("keyPicture", newList[position].picture)
+        ContextCompat.startActivity(this, intent, null)
     }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    fun addListToRV(): ArrayList<ItemDataClass>{
-        val userList = ArrayList<ItemDataClass>()
 
-        val user1 = ItemDataClass(R.drawable.user_1_pic, "Bob", "Marley")
-        userList.add(user1)
-
-        val user2 = ItemDataClass(R.drawable.user_2_pic, "Elvis", "Prestley")
-        userList.add(user2)
-
-        val user3 = ItemDataClass(R.drawable.user_3_pic, "Bob", "Dylan")
-        userList.add(user3)
-        val user4 = ItemDataClass(R.drawable.user_3_pic, "Bob", "Dylan")
-        userList.add(user4)
-        val user5 = ItemDataClass(R.drawable.user_3_pic, "Bob", "Dylan")
-        userList.add(user5)
-        val user6 = ItemDataClass(R.drawable.user_3_pic, "Bob", "Dylan")
-        userList.add(user6)
-
-        return userList
-    }
 }
