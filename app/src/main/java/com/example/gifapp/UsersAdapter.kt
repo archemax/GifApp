@@ -2,6 +2,7 @@ package com.example.gifapp
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
@@ -44,7 +45,7 @@ class UsersAdapter(
         holder.imageView.setImageResource(currentItem.picture)
         holder.textViewName.text = currentItem.name
         holder.textViewDescription.text = currentItem.description
-        // але треба різні картинки
+
     }
 
     // this fun returns the number of elements in list
