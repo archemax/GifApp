@@ -1,37 +1,48 @@
 package com.example.gifapp
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainViewModel : ViewModel() {
-    val usersLiveData = MutableLiveData<ArrayList<ItemDataClass>>()
+
+    private val apiInterface = ApiInterface.create().getMovies("67415281bcbc377c6203e656876fa57e")
+    val moviesLiveData = MutableLiveData<List<MovieResponse>>()
+
+    // gets the data from API and starts the method when ViewModel calss is initialized
 
     init {
-        createMockData()
+        getMovieData()
     }
 
-    fun createMockData() {
-        val usersDada = getUsersList()
-        usersLiveData.value = usersDada
+
+    private fun getMovieData() {
+        apiInterface.enqueue(object : Callback<MoviesDataClass> {
+
+            override fun onResponse(
+                call: Call<MoviesDataClass>,
+                response: Response<MoviesDataClass>
+            ) {
+                moviesLiveData.value = response.body()?.results
+                Log.d("MyLog", "this is responce from ViewModel: ${response.body()?.results}")
+
+                // how to pass data to viewModel??????
+            }
+
+            override fun onFailure(call: Call<MoviesDataClass>, t: Throwable) {
+                Log.d("MyLog", "this is error: $t")
+            }
+        })
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    fun getUsersList(): ArrayList<ItemDataClass> {
-        val userList = ArrayList<ItemDataClass>()
+    // передати сюди дані з API??????
 
-        val user1 = ItemDataClass(R.drawable.user_1_pic, "Bob", "Marley")
-        userList.add(user1)
-        val user2 = ItemDataClass(R.drawable.user_2_pic, "Elvis", "Prestley")
-        userList.add(user2)
-        val user3 = ItemDataClass(R.drawable.user_3_pic, "Charlie", "Dylan")
-        userList.add(user3)
-        val user4 = ItemDataClass(R.drawable.user_3_pic, "Jack", "Dylan")
-        userList.add(user4)
-        val user5 = ItemDataClass(R.drawable.user_3_pic, "Bill", "Dylan")
-        userList.add(user5)
-        val user6 = ItemDataClass(R.drawable.user_3_pic, "Jay", "Dylan")
-        userList.add(user6)
-
-        return userList
-    }
 }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+/// paste data fron API here
+
