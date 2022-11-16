@@ -1,11 +1,14 @@
 package com.example.gifapp
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.coroutines.coroutineContext
+
 
 class MainViewModel : ViewModel() {
 
@@ -34,6 +37,7 @@ class MainViewModel : ViewModel() {
 
             override fun onFailure(call: Call<MoviesDataClass>, t: Throwable) {
                 Log.d("MyLog", "this is error: $t")
+
             }
         })
     }

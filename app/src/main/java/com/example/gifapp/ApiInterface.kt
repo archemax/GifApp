@@ -4,6 +4,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 // terofit make dynamic quaery - (динамічний запит - який змінюється)
@@ -14,7 +15,11 @@ import retrofit2.http.Query
 interface ApiInterface {
 
     @GET("3/movie/popular")
-    fun getMovies(@Query ("api_key")sort: String): Call<MoviesDataClass>
+    fun getMovies(@Query("api_key") sort: String): Call<MoviesDataClass>
+
+    @GET("3/movie/{movie_id}")
+    fun getMovieDetails(@Path("movie_id") movieId: Int, @Query("api_key") sort: String): Call <MovieDetails>
+    //then we have to create new data class for one movie details
 
     companion object {
         val BASE_URL = "https://api.themoviedb.org/"

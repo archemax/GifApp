@@ -17,12 +17,30 @@ import retrofit2.Callback
 
 class UsersAdapter(
     private val context: MainActivity,
+    val mItemClickListener: ItemClickListener
 ) : RecyclerView.Adapter<UsersAdapter.MyViewHolder>() {
 
-    class MyViewHolder(oneItemView: View) : RecyclerView.ViewHolder(oneItemView) {
+    ///////itenClickInterface/////////////////////////////////////////////
+    interface ItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
+    ///////////////////////////////////////////////////////////////////
+
+
+    inner class MyViewHolder(oneItemView: View) : RecyclerView.ViewHolder(oneItemView) {
         // тут звязуємо розмітку
         val textViewMovieName: TextView = oneItemView.findViewById(R.id.myTvName)
         val imageView: ImageView = oneItemView.findViewById(R.id.myImageView)
+
+        // ititialize click listener interface
+        init {
+            oneItemView.setOnClickListener {
+                movies.get(position).id.let { movieId -> mItemClickListener.onItemClick(movieId) }
+
+            }
+        }
+
     }
 
     // create a list to put the data
