@@ -1,5 +1,7 @@
-package com.example.gifapp
+package com.example.gifapp.data.retrofit
 
+import com.example.gifapp.data.response.MovieResponse
+import com.example.gifapp.data.response.MoviesDataClass
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -18,7 +20,7 @@ interface ApiInterface {
     fun getMovies(@Query("api_key") sort: String): Call<MoviesDataClass>
 
     @GET("3/movie/{movie_id}")
-    fun getMovieDetails(@Path("movie_id") movieId: Int, @Query("api_key") sort: String): Call <MovieDetails>
+    fun getMovieDetails(@Path("movie_id") movieId: Int, @Query("api_key") sort: String): Call <MovieResponse>
     //then we have to create new data class for one movie details
 
     companion object {

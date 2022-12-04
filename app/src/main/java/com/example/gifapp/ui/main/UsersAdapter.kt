@@ -1,15 +1,16 @@
-package com.example.gifapp
+package com.example.gifapp.ui.main
 
-import android.util.Log
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.gifapp.data.response.MovieResponse
+import com.example.gifapp.R
 import com.squareup.picasso.Picasso
-import retrofit2.Callback
 
 // this is adapter for recycler view
 // create a ViewHolder inner  class  adapter class
@@ -20,7 +21,7 @@ class UsersAdapter(
     val mItemClickListener: ItemClickListener
 ) : RecyclerView.Adapter<UsersAdapter.MyViewHolder>() {
 
-    ///////itenClickInterface/////////////////////////////////////////////
+    ///////itemClickInterface/////////////////////////////////////////////
     interface ItemClickListener {
         fun onItemClick(position: Int)
     }
@@ -46,10 +47,19 @@ class UsersAdapter(
     // create a list to put the data
     private val movies = mutableListOf<MovieResponse>()
 
+
     fun addMovies(list: List<MovieResponse>) {
+        // create myDiffUtil object
+        val myDiffUtil = MyDiffUtil(movies, list)
+
+        //NOW we can calculate the difference between two lists
+        val myDiffUtilResult = DiffUtil.calculateDiff(myDiffUtil)
         movies.addAll(list)
-        notifyDataSetChanged()
+        // pass data to adapter
+        myDiffUtilResult.dispatchUpdatesTo(this)
     }
+
+    // DiffUtils - performance
 
     // in this fun we will pass the layout for one item
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

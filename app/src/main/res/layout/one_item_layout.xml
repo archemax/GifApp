@@ -4,13 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="0dp">
+    android:layout_margin="0dp"
+    android:backgroundTint="#FFFFFF">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-        app:cardBackgroundColor="#CD6767"
+        android:layout_margin="5dp"
+        app:cardBackgroundColor="#EAEAEA"
+        app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,6 +22,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#E8E8E8"
             android:padding="0dp">
 
             <ImageView
@@ -37,10 +41,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
-                android:layout_marginBottom="20dp"
                 android:text="NAME"
                 android:textAlignment="center"
-                android:textSize="14sp"
+                android:textSize="22sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/myImageView"
                 app:layout_constraintStart_toStartOf="@+id/myImageView"

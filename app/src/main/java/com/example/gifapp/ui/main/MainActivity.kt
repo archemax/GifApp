@@ -1,23 +1,19 @@
-package com.example.gifapp
+package com.example.gifapp.ui.main
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.annotation.MainThread
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.example.gifapp.UsersAdapter.ItemClickListener
+import com.example.gifapp.R
+import com.example.gifapp.ui.main.UsersAdapter.ItemClickListener
 import com.example.gifapp.databinding.ActivityMainBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
-
     lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,10 +23,11 @@ class MainActivity : AppCompatActivity() {
 
         val usersAdapter = UsersAdapter(this@MainActivity, object : ItemClickListener {
             override fun onItemClick(id: Int) {
-                Toast.makeText(this@MainActivity, "the ID of the movie $id", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, "the ID of the movie $id", Toast.LENGTH_SHORT)
+                    .show()
                 // make intent to go to the other actiivity
-                val intent = Intent (this@MainActivity, OneMovieActivity::class.java)
-                intent.putExtra("id", id)
+                val intent = Intent(this@MainActivity, OneMovieActivity::class.java)
+                intent.putExtra(OneMovieActivity.MOVIE_ID, id)
                 startActivity(intent)
             }
         })

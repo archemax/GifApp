@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OneMovieActivity">
+    android:background="#8E8E8E"
+    android:backgroundTint="#DCDCDC"
+    android:padding="10dp"
+    tools:context=".ui.main.OneMovieActivity">
 
     <TextView
         android:id="@+id/noID3"
@@ -42,6 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/one_movie_layout_movieName"
@@ -111,5 +115,9 @@
         app:layout_constraintEnd_toEndOf="@+id/noId2"
         app:layout_constraintStart_toStartOf="@+id/noId2"
         app:layout_constraintTop_toBottomOf="@+id/noId2" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

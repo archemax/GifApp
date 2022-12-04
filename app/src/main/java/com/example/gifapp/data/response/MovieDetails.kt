@@ -1,4 +1,4 @@
-package com.example.gifapp
+package com.example.gifapp.data.response
 
 data class MovieDetails(
     val id: Int,

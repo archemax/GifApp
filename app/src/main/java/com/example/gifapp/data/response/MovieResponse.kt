@@ -1,4 +1,6 @@
-package com.example.gifapp
+package com.example.gifapp.data.response
+
+import com.google.gson.annotations.SerializedName
 
 data class MovieResponse(
     val adult: Boolean,
@@ -14,5 +16,7 @@ data class MovieResponse(
     val title: String,
     val video: Boolean,
     val vote_average: Double,
-    val vote_count: Int
+
+    @SerializedName("vote_count") // GSON
+    val voteCount: Int
 )
