@@ -1,4 +1,4 @@
-package com.example.gifapp.ui.main
+package com.example.gifapp.ui.main.mainActivity
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

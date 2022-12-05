@@ -1,20 +1,13 @@
-package com.example.gifapp.ui.main
+package com.example.gifapp.ui.main.oneMovieActivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.gifapp.data.retrofit.ApiInterface
 import com.example.gifapp.R
-import com.example.gifapp.data.response.MovieResponse
-import com.example.gifapp.utils.Constants
 import com.squareup.picasso.Picasso
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class OneMovieActivity : AppCompatActivity() {
 

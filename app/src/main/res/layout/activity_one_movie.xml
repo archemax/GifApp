@@ -7,7 +7,7 @@
     android:background="#8E8E8E"
     android:backgroundTint="#DCDCDC"
     android:padding="10dp"
-    tools:context=".ui.main.OneMovieActivity">
+    tools:context=".ui.main.oneMovieActivity.OneMovieActivity">
 
     <TextView
         android:id="@+id/noID3"

@@ -1,6 +1,5 @@
 package com.example.gifapp.ui.main
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gifapp.data.response.MovieResponse
 import com.example.gifapp.R
+import com.example.gifapp.ui.main.mainActivity.MainActivity
 import com.squareup.picasso.Picasso
 
 // this is adapter for recycler view

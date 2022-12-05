@@ -1,15 +1,19 @@
-package com.example.gifapp.ui.main
+package com.example.gifapp.ui.main.mainActivity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gifapp.R
 import com.example.gifapp.ui.main.UsersAdapter.ItemClickListener
 import com.example.gifapp.databinding.ActivityMainBinding
+import com.example.gifapp.ui.main.oneMovieActivity.OneMovieActivity
+import com.example.gifapp.ui.main.UsersAdapter
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,6 +24,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+
 
         val usersAdapter = UsersAdapter(this@MainActivity, object : ItemClickListener {
             override fun onItemClick(id: Int) {
@@ -44,6 +50,25 @@ class MainActivity : AppCompatActivity() {
             usersAdapter.addMovies(movies)
 
         }
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.top_rated -> {
+                Toast.makeText(this, "this is top rated",Toast.LENGTH_LONG).show()
+            }
+            R.id.popular ->{
+                Toast.makeText(this, "this is top popular",Toast.LENGTH_LONG).show()
+            }
+            R.id.upcoming ->{
+                Toast.makeText(this, "this is top upcoming",Toast.LENGTH_LONG).show()
+            }
+        }
+        return true
     }
 }
 
